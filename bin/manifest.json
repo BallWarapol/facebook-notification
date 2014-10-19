@@ -1,8 +1,8 @@
 {
   "name" : "UhBaUnTaUh Facebook Notification",
-  "version" : "0.1",
+  "version" : "2.0",
   "description" : "Facebook notification witch work on Windows, Linux, and Mac",
-  "permissions": [ "notifications", "tabs" ],
+  "permissions": [ "notifications", "tabs", "http://*/*", "https://*/*"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
