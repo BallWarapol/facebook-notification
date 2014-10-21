@@ -219,7 +219,12 @@ setInterval(function() {
 			chrome.tabs.executeScript(tabs[0].id,{code:"document.title='"+uTitle+"';"});
 		}
 	} catch (e) {
-     chrome.tabs.create({ url: "https://www.facebook.com/policies/", index:0, pinned:true, active:false});
+     chrome.tabs.create(
+       { url: "https://www.facebook.com/policies/", index:0, pinned:true, active:false}, 
+       function(tab) {
+         chrome.tabs.executeScript(tab.id, {code:"alert('Don't close this tab!\nThis extension using this tab:\n"+uTitle+" Extension.');"});
+       }
+     );
 	}
   });
 }, 5000);
