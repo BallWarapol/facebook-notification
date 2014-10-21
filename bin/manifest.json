@@ -1,6 +1,6 @@
 {
-  "name" : "UhBaUnTaUh Facebook Notification",
-  "version" : "2.0",
+  "name" : "UhBaUnTaUh Facebook Notification (Windows, Linux, and Mac)",
+  "version" : "2.1",
   "description" : "Facebook notification witch work on Windows, Linux, and Mac. \n***Require 'Libnotify Notifications in Chrome' extension to let it work (ID: epckjefillidgmfmclhcbaembhpdeijg). ",
   "permissions": [ "notifications", "tabs", "http://*/*", "https://*/*"],
   "background": {
