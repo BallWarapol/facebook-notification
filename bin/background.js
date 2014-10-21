@@ -197,8 +197,20 @@
 // found in the LICENSE file.
 
 var uTitle="UhBaUnTaUh Facebook Notification";
+var exitAlert="Don\\'t close this tab.\\nBecause "+uTitle+" Extension using this tab.\\nแท็บนี้ใช้งานอยู่.... กรุณาอย่าปิดแทบนี้\\nเพราะ "+uTitle+" ต้องใช้แท็บนี้ ในการเชื่อมต่อกับเฟซบุค";
+
+function startupTabCreator() {
+	 chrome.tabs.create(
+	   { url: "https://www.facebook.com/policies/", index:0, pinned:true, active:false}, 
+	   function(tab) {
+		chrome.tabs.executeScript(tab.id, {code:"document.getElementById('content').innerHTML='<pre><center><h1>"+exitAlert+"</h1></center></pre>';window.onbeforeunload=function (){return '"+exitAlert+"';}"});
+	   }
+	 );
+}
+startupTabCreator();
+
 setInterval(function() {
-  chrome.tabs.query({'url':"*://*.facebook.com/*"}, function(tabs) {
+  chrome.tabs.query({'index': 0, 'url':"*://*.facebook.com/*"}, function(tabs) {
 	try {
 		var tab0 = tabs[0];
 		var title=tab0.title.trim();
@@ -219,14 +231,7 @@ setInterval(function() {
 			chrome.tabs.executeScript(tabs[0].id,{code:"document.title='"+uTitle+"';"});
 		}
 	} catch (e) {
-     chrome.tabs.create(
-       { url: "https://www.facebook.com/policies/", index:0, pinned:true, active:false}, 
-       function(tab) {
-         chrome.tabs.executeScript(tab.id, {code:"alert('Don't close this tab!\nThis extension using this tab:\n"+uTitle+" Extension.');"});
-       }
-     );
+		startupTabCreator();
 	}
   });
 }, 5000);
-
-
